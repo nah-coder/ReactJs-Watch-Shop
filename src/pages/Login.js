@@ -20,16 +20,18 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); // Xóa lỗi cũ
-
+  
     try {
-      const response = await axios.post("https://66e2fd20494df9a478e3e211.mockapi.io/api/v1/Authen", {
-        username: formData.username,
-        password: formData.password,
-      });
-
-      if (formData.username === "UserName 1" && formData.password === "Password 1") {
-        localStorage.setItem("token", response.data.Token);
-        localStorage.setItem("username", formData.username);
+      const response = await axios.get("https://66e2fd20494df9a478e3e211.mockapi.io/api/v1/Authen");
+  
+      // Kiểm tra username và password trong danh sách user từ API
+      const user = response.data.find(
+        (user) => user.username === formData.username && user.password === formData.password
+      );
+  
+      if (user) {
+        localStorage.setItem("token", user.Token);
+        localStorage.setItem("username", user.username);
         setIsLoggedIn(true); // Đánh dấu đã đăng nhập
         alert("Đăng nhập thành công!");
       } else {
@@ -39,6 +41,7 @@ function Login() {
       setError("Lỗi kết nối API!");
     }
   };
+  
 
   // Hàm đăng xuất
   const handleLogout = () => {

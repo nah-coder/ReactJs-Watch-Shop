@@ -43,26 +43,35 @@ function Header() {
                           </li>
                         </ul>
                       </li>
+                      {/* <Tippy
+                        render={(attrs) => (
+                          <div className="box" tabIndex="-1" {...attrs}>
+                            My tippy box
+                          </div>
+                        )}
+                      >
+                        <button>My button</button>
+                      </Tippy> */}
+
                       <Tippy
                         interactive
                         render={(attrs) => (
                           <div tabIndex="-1" {...attrs}>
                             <Wrapper className="submenu">
-                            <ul>
-                              <li>
-                                <Link to="/blog">Blog</Link>
-                              </li>
-                              <li>
-                                <Link to="/blog-details">Blog Details</Link>
-                              </li>
-                            </ul>
+                              <ul className="">
+                                <li className="">
+                                  <Link to="/blog">Blog</Link>
+                                </li>
+                                <li>
+                                  <Link to="/blog-details">Blog Details</Link>
+                                </li>
+                              </ul>
                             </Wrapper>
                           </div>
                         )}
                       >
                         <li>
                           <Link to="/blog">Blog</Link>
-                          
                         </li>
                       </Tippy>
                       {/* <li>

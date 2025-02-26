@@ -2,9 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import request from "../api/Request";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function Product_Detail() {
   const { id } = useParams(); // Lấy id sản phẩm từ URL
@@ -19,7 +16,7 @@ function Product_Detail() {
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
-    };
+    };  
 
     if (id) {
       getProductDetail();
@@ -30,32 +27,33 @@ function Product_Detail() {
     return <div>Loading...</div>; // Hiển thị khi đang tải dữ liệu
   }
 
-  var settingSlide = {
-    dots: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 1200,
-    responsive: [
-      {
-        breakpoint: 850,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  // var settingSlide = {
+  //   dots: true,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 1200,
+  //   infinite: true, // Cho phép lướt vô hạn
+  //   responsive: [
+  //     {
+  //       breakpoint: 850,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
 
   // Chuyển `Image` thành mảng nếu nó là chuỗi
-  const images = Array.isArray(product.Image) ? product.Image : [product.Image];
+  // const images = Array.isArray(product.Image) ? product.Image : [product.Image];
 
   return (
     <>
@@ -80,22 +78,23 @@ function Product_Detail() {
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-lg-12">
-                {/* <img
+                <img
                   src={"http://localhost:3000/" + product.Image}
                   alt="#"
                   className="img-fluid"
-                /> */}
-                 <Slider className="slider" {...settingSlide}>
+                />
+                 {/* <Slider className="slider" {...settingSlide}>
                   {images.map((image, index) => (
                     <div className="single_product_img" key={index}>
                       <img
                         src={`http://localhost:3000/${image}`}
                         alt="Product"
                         className="img-fluid"
+                        style={{ display: "block", margin: "0 auto" }}
                       />
                     </div>
                   ))}
-                </Slider>
+                </Slider> */}
               </div>
               <div className="col-lg-8">
                 <div className="single_product_text text-center">
