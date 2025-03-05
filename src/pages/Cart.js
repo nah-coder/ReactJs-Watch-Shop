@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import CartItem from "./CartItem";
 
 function Cart({ cart }) {
+
   let elementCartItem = cart.map((item, index) => {
-    return <CartItem key={index} renderCart={item} stt={index + 1} />;
+    return <CartItem key={index} renderCart={item} stt={index + 1}/>;
   });
   return (
     <>
@@ -28,7 +29,6 @@ function Cart({ cart }) {
           <div className="container">
             <div className="cart_inner">
               <div className="table-responsive">
-                {elementCartItem}
                 <table className="table">
                   <thead>
                     <tr>
@@ -39,6 +39,7 @@ function Cart({ cart }) {
                     </tr>
                   </thead>
                   <tbody>
+                    {elementCartItem}
                     <tr className="bottom_button">
                       <td>
                         <a className="btn_1" href="/some-page">

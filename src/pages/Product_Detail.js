@@ -34,6 +34,24 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
     buyItem(product, quantity);
   };
 
+  // Hàm xử lý thay đổi số lượng
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value > 0) {
+      setQuantity(value);
+    }
+  };
+
+  // Hàm tăng số lượng
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  // Hàm giảm số lượng
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
   return (
     <>
       <main>
@@ -73,7 +91,7 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
                       <div className="product_count d-inline-block">
                         <span
                           className="product_count_item number-increment"
-                          onClick={() => setQuantity((prev) => prev + 1)}
+                          onClick={decreaseQuantity}
                         >
                           <i className="ti-plus" />
                         </span>
@@ -82,13 +100,10 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
                           name="quantity"
                           value={quantity}
                           type="number"
+                          onChange={handleQuantityChange}
                           defaultValue={1}
-                          onChange={(ev) => {
-                            let val = parseInt(ev.target.value);
-                            setQuantity(val > 0 ? val : 1);
-                          }}
                         />
-                        <span className="product_count_item number-increment">
+                        <span className="product_count_item number-increment" onClick={increaseQuantity}>
                           {" "}
                           <i className="ti-plus" />
                         </span>
