@@ -1,11 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import request from "../api/Request";
+import { act_buy_item } from "../Action";
+import { connect } from "react-redux";
 
-function Product_Detail() {
+function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
   const { id } = useParams(); // Lấy id sản phẩm từ URL
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1); // Chuyển state quantity sang useState
 
   useEffect(() => {
     const getProductDetail = async () => {
@@ -16,7 +19,7 @@ function Product_Detail() {
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
-    };  
+    };
 
     if (id) {
       getProductDetail();
@@ -27,33 +30,9 @@ function Product_Detail() {
     return <div>Loading...</div>; // Hiển thị khi đang tải dữ liệu
   }
 
-  // var settingSlide = {
-  //   dots: true,
-  //   slidesToShow: 3,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   autoplaySpeed: 1200,
-  //   infinite: true, // Cho phép lướt vô hạn
-  //   responsive: [
-  //     {
-  //       breakpoint: 850,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: {
-  //         slidesToShow: 1,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
-
-  // Chuyển `Image` thành mảng nếu nó là chuỗi
-  // const images = Array.isArray(product.Image) ? product.Image : [product.Image];
+  const handleBy = () => {
+    buyItem(product, quantity);
+  };
 
   return (
     <>
@@ -83,18 +62,6 @@ function Product_Detail() {
                   alt="#"
                   className="img-fluid"
                 />
-                 {/* <Slider className="slider" {...settingSlide}>
-                  {images.map((image, index) => (
-                    <div className="single_product_img" key={index}>
-                      <img
-                        src={`http://localhost:3000/${image}`}
-                        alt="Product"
-                        className="img-fluid"
-                        style={{ display: "block", margin: "0 auto" }}
-                      />
-                    </div>
-                  ))}
-                </Slider> */}
               </div>
               <div className="col-lg-8">
                 <div className="single_product_text text-center">
@@ -104,16 +71,22 @@ function Product_Detail() {
                     <div className="product_count_area">
                       <p>Quantity</p>
                       <div className="product_count d-inline-block">
-                        <span className="product_count_item inumber-decrement">
-                          {" "}
-                          <i className="ti-minus" />
+                        <span
+                          className="product_count_item number-increment"
+                          onClick={() => setQuantity((prev) => prev + 1)}
+                        >
+                          <i className="ti-plus" />
                         </span>
                         <input
                           className="product_count_item input-number"
-                          type="text"
+                          name="quantity"
+                          value={quantity}
+                          type="number"
                           defaultValue={1}
-                          min={0}
-                          max={10}
+                          onChange={(ev) => {
+                            let val = parseInt(ev.target.value);
+                            setQuantity(val > 0 ? val : 1);
+                          }}
                         />
                         <span className="product_count_item number-increment">
                           {" "}
@@ -123,9 +96,9 @@ function Product_Detail() {
                       <p>$ {product.Price}</p>
                     </div>
                     <div className="add_to_cart">
-                      <a href="/some" className="btn_3">
+                      <Link to="/cart" className="btn_3" onClick={handleBy}>
                         add to cart
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -163,4 +136,14 @@ function Product_Detail() {
   );
 }
 
-export default Product_Detail;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //bắn action mua hàng đến reducers
+    buyItem: (product, quantity) => {
+      dispatch(act_buy_item(product, quantity));
+    },
+    //
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Product_Detail);

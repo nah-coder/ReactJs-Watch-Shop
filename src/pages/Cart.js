@@ -1,6 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
+import CartItem from "./CartItem";
 
-function Cart() {
+function Cart({ cart }) {
+  let elementCartItem = cart.map((item, index) => {
+    return <CartItem key={index} renderCart={item} stt={index + 1} />;
+  });
   return (
     <>
       <main>
@@ -23,6 +28,7 @@ function Cart() {
           <div className="container">
             <div className="cart_inner">
               <div className="table-responsive">
+                {elementCartItem}
                 <table className="table">
                   <thead>
                     <tr>
@@ -33,80 +39,6 @@ function Cart() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div className="media">
-                          <div className="d-flex">
-                            <img src="assets/img/gallery/card1.png" alt="" />
-                          </div>
-                          <div className="media-body">
-                            <p>Minimalistic shop for multipurpose use</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$360.00</h5>
-                      </td>
-                      <td>
-                        <div className="product_count">
-                          <span className="input-number-decrement">
-                            {" "}
-                            <i className="ti-minus" />
-                          </span>
-                          <input
-                            className="input-number"
-                            type="text"
-                            defaultValue={1}
-                            min={0}
-                            max={10}
-                          />
-                          <span className="input-number-increment">
-                            {" "}
-                            <i className="ti-plus" />
-                          </span>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$720.00</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="media">
-                          <div className="d-flex">
-                            <img src="assets/img/gallery/card2.png" alt="" />
-                          </div>
-                          <div className="media-body">
-                            <p>Minimalistic shop for multipurpose use</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$360.00</h5>
-                      </td>
-                      <td>
-                        <div className="product_count">
-                          <span className="input-number-decrement">
-                            {" "}
-                            <i className="ti-minus" />
-                          </span>
-                          <input
-                            className="input-number"
-                            type="text"
-                            defaultValue={1}
-                            min={0}
-                            max={10}
-                          />
-                          <span className="input-number-increment">
-                            {" "}
-                            <i className="ti-plus" />
-                          </span>
-                        </div>
-                      </td>
-                      <td>
-                        <h5>$720.00</h5>
-                      </td>
-                    </tr>
                     <tr className="bottom_button">
                       <td>
                         <a className="btn_1" href="/some-page">
@@ -219,4 +151,8 @@ function Cart() {
   );
 }
 
-export default Cart;
+const mapStateToProps = (state) => ({
+  cart: state.cart, // Giả sử Redux có reducer `cart`
+});
+
+export default connect(mapStateToProps, null)(Cart);
