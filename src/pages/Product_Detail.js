@@ -73,7 +73,7 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
         {/*================Single Product Area =================*/}
         <div className="product_image_area">
           <div className="container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center" key={product.id}>
               <div className="col-lg-12">
                 <img
                   src={"http://localhost:3000/" + product.Image}
@@ -101,7 +101,6 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
                           value={quantity}
                           type="number"
                           onChange={handleQuantityChange}
-                          defaultValue={1}
                         />
                         <span className="product_count_item number-increment" onClick={increaseQuantity}>
                           {" "}

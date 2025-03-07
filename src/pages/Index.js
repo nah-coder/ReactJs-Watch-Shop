@@ -234,8 +234,8 @@ function Index() {
               </div>
             </div>
             <div className="row">
-              {Products.map((item) => (
-                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+              {Products.map((item,index) => (
+                <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6" key={index}>
                   <div className="single-popular-items mb-50 text-center">
                     <div className="popular-img">
                       <img src={item.Image} alt="" />

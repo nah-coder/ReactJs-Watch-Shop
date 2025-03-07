@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "tippy.js/dist/tippy.css"; // Import CSS của Tippy
-import HeadlessTippy from "@tippyjs/react/headless"; // different import path!
-import Wrapper from "../../Popper/Wrapper";
-import Tippy from "@tippyjs/react/headless";
+
 function Header() {
   return (
     <>
@@ -43,60 +40,17 @@ function Header() {
                           </li>
                         </ul>
                       </li>
-                      {/* <Tippy
-                        render={(attrs) => (
-                          <div className="box" tabIndex="-1" {...attrs}>
-                            My tippy box
-                          </div>
-                        )}
-                      >
-                        <button>My button</button>
-                      </Tippy> */}
-
-                      <Tippy
-                        interactive
-                        render={(attrs) => (
-                          <div tabIndex="-1" {...attrs}>
-                            <Wrapper className="submenu">
-                              <ul className="">
-                                <li className="">
-                                  <Link to="/blog">Blog</Link>
-                                </li>
-                                <li>
-                                  <Link to="/blog-details">Blog Details</Link>
-                                </li>
-                              </ul>
-                            </Wrapper>
-                          </div>
-                        )}
-                      >
-                        <li>
-                          <Link to="/blog">Blog</Link>
-                        </li>
-                      </Tippy>
-                      {/* <li>
-                        <Tippy
-                          interactive
-                          visible={true}
-                          render={(attrs) => (
-                            <div
-                              tabIndex="-1"
-                              {...attrs}
-                            >
-                              <li>
-                              <Link to="/blog">Blog</Link>
-                            </li>
-                            <li>
-                              <Link to="/blog-details">Blog Details</Link>
-                            </li>
-                            </div>
-                          )}
-                        >
-                          <Link to="/blog">Blog</Link>
-                          <ul className="submenu">
-                          </ul>
-                        </Tippy>
-                      </li> */}
+                      <li>
+                        <Link to="/blog">Blog</Link>
+                        <ul className="submenu">
+                          <li className="">
+                            <Link to="/blog">Blog</Link>
+                          </li>
+                          <li>
+                            <Link to="/blog-details">Blog Details</Link>
+                          </li>
+                        </ul>
+                      </li>
                       <li>
                         <Link to="/login">Pages</Link>
                         <ul className="submenu">

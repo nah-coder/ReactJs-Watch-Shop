@@ -106,7 +106,7 @@ function Shop() {
               >
                 <div className="row">
                   {data.map((item) => (
-                    <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                    <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6" key={item.id}>
                       <div className="single-popular-items mb-50 text-center">
                         <div className="popular-img">
                           <img src={item.Image} alt="" />

@@ -239,8 +239,8 @@ function Blog() {
                   </aside>
                   <aside className="single_sidebar_widget popular_post_widget">
                     <h3 className="widget_title">Recent Post</h3>
-                    {Post.map((item) => (
-                      <div className="media post_item">
+                    {Post.map((item,index) => (
+                      <div className="media post_item" key={index}>
                         <img src={item.Image} alt="post" />
                         <div className="media-body">
                           <a href="single-blog.html">

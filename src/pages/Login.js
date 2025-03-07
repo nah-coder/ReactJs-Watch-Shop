@@ -100,7 +100,7 @@ function Login() {
             {/* FORM ĐĂNG NHẬP */}
             <div className="col-lg-6 col-md-6">
               <div className="login_part_form">
-                <div className="login_part_form_iner">
+                <div className="login_part_form_iner" key={formData.id}>
                   {!isLoggedIn ? (
                     <>
                       <h3>Welcome Back! Please Sign in now</h3>
