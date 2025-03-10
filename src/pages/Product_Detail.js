@@ -88,12 +88,12 @@ function Product_Detail({ buyItem }) {  // Nhận buyItem từ props
                   <div className="card_area">
                     <div className="product_count_area">
                       <p>Quantity</p>
-                      <div className="product_count d-inline-block">
+                      <div className="product_count d-inline-block" >
                         <span
                           className="product_count_item number-increment"
                           onClick={decreaseQuantity}
                         >
-                          <i className="ti-plus" />
+                          <i className="ti-plus"/>
                         </span>
                         <input
                           className="product_count_item input-number"

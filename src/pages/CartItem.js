@@ -1,40 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
 function CartItem({ renderCart }) {
+  const [quantity, setQuantity] = useState(renderCart.quantity);
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value);
+    if (value > 0) {
+      setQuantity(value);
+    }
+  };
+  
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  // Hàm giảm số lượng
+  const decreaseQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
+
   return (
     <tr>
       <td>
         <div className="media">
           <div className="d-flex">
-            <img src={renderCart.Image} alt="" />
+            <img src={renderCart.product.Image} alt="" />
           </div>
           <div className="media-body">
-            <p>{renderCart.Name}</p>
+            <p>{renderCart.product.Name}</p>
           </div>
         </div>
       </td>
       <td>
-        <h5>$ {renderCart.Price}</h5>
+        <h5>$ {renderCart.product.Price}</h5>
       </td>
       <td>
         <div className="product_count">
-          <span className="input-number-decrement">
+        <span className="input-number-decrement" onClick={decreaseQuantity} style={{ lineHeight: "11px" }}>
             <i className="ti-minus" />
           </span>
           <input
             className="input-number"
             type="number"
-            value={renderCart.quantity}
+            value={quantity}
             min={1}
-            readOnly // Nếu muốn thay đổi, cần truyền sự kiện từ component cha
+            onChange={handleQuantityChange}
+            // readOnly
           />
-          <span className="input-number-increment">
+          <span className="input-number-increment" onClick={increaseQuantity}>
             <i className="ti-plus" />
           </span>
         </div>
       </td>
       <td>
-        <h5>$ {renderCart.Price * renderCart.quantity}</h5>
+        <h5>$ {renderCart.product.Price * quantity}</h5>
       </td>
     </tr>
   );

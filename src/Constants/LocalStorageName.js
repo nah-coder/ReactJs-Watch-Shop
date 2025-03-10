@@ -1,1 +1,2 @@
-export const LOCAL_STORAGE_NAME = "HUY2003-ShoppingCart"
+export const LOCAL_STORAGE_NAME = "ShoppingCart"
+export const STORAGE_NAME = "ShopCart"

@@ -3,10 +3,14 @@ import { connect } from "react-redux";
 import CartItem from "./CartItem";
 
 function Cart({ cart }) {
-
   let elementCartItem = cart.map((item, index) => {
     return <CartItem key={index} renderCart={item} stt={index + 1}/>;
   });
+  let total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].product.Price*cart[i].quantity;
+    
+  }
   return (
     <>
       <main>
@@ -63,7 +67,7 @@ function Cart({ cart }) {
                         <h5>Subtotal</h5>
                       </td>
                       <td>
-                        <h5>$2160.00</h5>
+                        <h5>$ {total}</h5>
                       </td>
                     </tr>
                     <tr className="shipping_area">

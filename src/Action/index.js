@@ -24,3 +24,4 @@ export const act_remove_item=(product)=>{
         product,
     }
 }
+  
